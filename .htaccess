@@ -1,0 +1,297 @@
+# ============================================
+# PLIK .htaccess - ARS CONSULTING
+# ============================================
+# Konfiguracja Apache dla strony arsconsulting.pl
+# Zawiera: przekierowania, routing SPA, kompresję, cachowanie, bezpieczeństwo
+# Autor: emer.co
+# Data ostatniej aktualizacji: 2025
+# ============================================
+
+
+# ============================================
+# MODUŁ REWRITE - PRZEKIEROWANIA I ROUTING
+# ============================================
+<IfModule mod_rewrite.c>
+    # Włączenie silnika przepisywania URL
+    RewriteEngine On
+    
+    # Ustawienie podstawowej ścieżki (główny katalog)
+    RewriteBase /
+
+    # ----------------------------------------
+    # PRZEKIEROWANIE 1: HTTP → HTTPS
+    # ----------------------------------------
+    # Cel: Wymuszenie bezpiecznego połączenia HTTPS
+    # Przykład: http://arsconsulting.pl → https://arsconsulting.pl
+    
+    # Warunek: Sprawdź czy HTTPS jest wyłączone
+    RewriteCond %{HTTPS} off
+    
+    # Akcja: Przekieruj na HTTPS z zachowaniem pełnego URL
+    # [L] = Last (ostatnia reguła, zatrzymaj przetwarzanie)
+    # [R=301] = Redirect permanent (przekierowanie stałe, dobre dla SEO)
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # ----------------------------------------
+    # PRZEKIEROWANIE 2: bez www → www
+    # ----------------------------------------
+    # Cel: Standaryzacja domeny z prefiksem www
+    # Przykład: https://arsconsulting.pl → https://www.arsconsulting.pl
+    
+    # Warunek 1: Sprawdź czy domena NIE zaczyna się od "www."
+    # [NC] = No Case (nie rozróżniaj wielkich/małych liter)
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    
+    # Warunek 2: Wykluczenie localhost (dla testów lokalnych)
+    # Dzięki temu na localhost nie będzie przekierowania
+    RewriteCond %{HTTP_HOST} !^localhost [NC]
+    
+    # Akcja: Dodaj "www." do domeny i przekieruj
+    # %{HTTP_HOST} = nazwa domeny
+    # %{REQUEST_URI} = pełna ścieżka po domenie
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # ----------------------------------------
+    # ROUTING 3: SPA (Single Page Application)
+    # ----------------------------------------
+    # Cel: Obsługa routingu JavaScript (/pl, /en, itp.)
+    # Wszystkie żądania do nieistniejących plików/folderów kieruj do index.html
+    # Pozwala to JavaScript obsłużyć routing po stronie klienta
+    
+    # Warunek 1: Sprawdź czy żądany plik NIE istnieje fizycznie
+    # !-f = nie jest plikiem
+    RewriteCond %{REQUEST_FILENAME} !-f
+    
+    # Warunek 2: Sprawdź czy żądany katalog NIE istnieje fizycznie
+    # !-d = nie jest katalogiem
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Akcja: Przekieruj WSZYSTKO na index.html
+    # Dzięki temu /pl, /en, /pl/kontakt itp. będą działać
+    # JavaScript w index.html przejmie kontrolę i wyświetli właściwą treść
+    # . = dopasuj cokolwiek
+    RewriteRule . /index.html [L]
+</IfModule>
+
+
+# ============================================
+# KOMPRESJA GZIP
+# ============================================
+# Cel: Zmniejszenie rozmiaru przesyłanych plików
+# Korzyści: Szybsze ładowanie strony, mniejsze zużycie transferu
+# Kompresja może zmniejszyć rozmiar plików nawet o 70-90%
+
+<IfModule mod_deflate.c>
+    # Włącz kompresję dla wymienionych typów plików
+    
+    # text/html - pliki HTML
+    # text/plain - zwykły tekst
+    # text/xml - pliki XML
+    # text/css - arkusze stylów CSS
+    # text/javascript - stare JavaScript
+    # application/javascript - nowoczesny JavaScript
+    # application/json - pliki JSON (API, dane)
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+
+# ============================================
+# CACHOWANIE PRZEGLĄDARKI
+# ============================================
+# Cel: Przyśpieszenie ładowania strony dla powracających użytkowników
+# Pliki statyczne (obrazy, CSS, JS) będą zapisane w pamięci przeglądarki
+# Przy ponownej wizycie nie będą pobierane ponownie z serwera
+
+<IfModule mod_expires.c>
+    # Włącz cachowanie
+    ExpiresActive On
+    
+    # ----------------------------------------
+    # OBRAZY - cachowanie przez 1 rok
+    # ----------------------------------------
+    # Obrazy rzadko się zmieniają, więc długi czas cachowania
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # ----------------------------------------
+    # CSS i JavaScript - cachowanie przez 1 miesiąc
+    # ----------------------------------------
+    # Średni czas - mogą się zmieniać przy aktualizacjach
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # ----------------------------------------
+    # HTML - cachowanie przez 1 godzinę
+    # ----------------------------------------
+    # Krótki czas - treść może się często zmieniać
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # ----------------------------------------
+    # FONTY - cachowanie przez 1 rok
+    # ----------------------------------------
+    # Fonty prawie nigdy się nie zmieniają
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    
+    # ----------------------------------------
+    # PDF i dokumenty - cachowanie przez 1 miesiąc
+    # ----------------------------------------
+    ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
+
+
+# ============================================
+# BEZPIECZEŃSTWO - PODSTAWOWA OCHRONA
+# ============================================
+
+# ----------------------------------------
+# Wyłącz wyświetlanie zawartości katalogów
+# ----------------------------------------
+# Cel: Ukryj listę plików w folderach
+# Przykład: Bez tego opcja użytkownik mógłby zobaczyć listę wszystkich
+# plików wchodząc np. na /images/
+Options -Indexes
+
+# ----------------------------------------
+# Zablokuj dostęp do ukrytych plików
+# ----------------------------------------
+# Cel: Ochrona plików systemowych (.htaccess, .git, itp.)
+# Wzorzec: Wszystkie pliki zaczynające się od kropki
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ----------------------------------------
+# Dodatkowa ochrona dla .htaccess
+# ----------------------------------------
+# Cel: Podwójna ochrona tego pliku konfiguracyjnego
+# Nawet jeśli ktoś spróbuje się dostać, dostanie błąd 403
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# ----------------------------------------
+# Zablokuj dostęp do plików backup
+# ----------------------------------------
+# Cel: Ochrona kopii zapasowych i tymczasowych plików
+# Wzorce: pliki kończące się na .bak, .old, .sql, ~
+<FilesMatch "\.(bak|old|sql|log|sh|ini|conf|orig|save|swo|swp|~)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+
+# ============================================
+# NAGŁÓWKI BEZPIECZEŃSTWA HTTP
+# ============================================
+# Cel: Dodatkowa ochrona przed atakami
+# Te nagłówki są wysyłane z każdym żądaniem HTTP
+
+<IfModule mod_headers.c>
+    
+    # ----------------------------------------
+    # X-Frame-Options - Ochrona przed Clickjacking
+    # ----------------------------------------
+    # Cel: Zapobiegaj osadzaniu strony w iframe na innych domenach
+    # SAMEORIGIN = można osadzić tylko na tej samej domenie
+    # Chroni przed: atakami typu clickjacking (nakładanie niewidocznych ramek)
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # ----------------------------------------
+    # X-Content-Type-Options - Ochrona przed MIME sniffing
+    # ----------------------------------------
+    # Cel: Wymuś używanie zadeklarowanych typów MIME
+    # nosniff = przeglądarka nie może "zgadywać" typu pliku
+    # Chroni przed: atakami typu drive-by download
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # ----------------------------------------
+    # X-XSS-Protection - Ochrona przed XSS
+    # ----------------------------------------
+    # Cel: Włącz wbudowany filtr XSS przeglądarki
+    # 1; mode=block = włącz i blokuj podejrzane skrypty
+    # Chroni przed: atakami Cross-Site Scripting (wstrzykiwanie JS)
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # ----------------------------------------
+    # HSTS - HTTP Strict Transport Security
+    # ----------------------------------------
+    # Cel: Wymuś HTTPS przez określony czas
+    # max-age=31536000 = 1 rok (w sekundach)
+    # includeSubDomains = dotyczy też subdomen
+    # Chroni przed: atakami man-in-the-middle, downgrade attacks
+    # UWAGA: Ustaw to tylko jeśli masz PEWNOŚĆ, że HTTPS działa poprawnie!
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # ----------------------------------------
+    # Referrer-Policy - Kontrola nagłówka Referer
+    # ----------------------------------------
+    # Cel: Kontroluj jakie informacje są wysyłane do innych stron
+    # strict-origin-when-cross-origin = pełny URL tylko na tej samej domenie
+    # Chroni: prywatność użytkowników
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # ----------------------------------------
+    # Permissions-Policy - Kontrola API przeglądarki
+    # ----------------------------------------
+    # Cel: Określ które API mogą być używane
+    # geolocation=() = wyłącz geolokalizację
+    # microphone=() = wyłącz mikrofon
+    # camera=() = wyłącz kamerę
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+</IfModule>
+
+
+# ============================================
+# STRONA BŁĘDÓW (OPCJONALNIE)
+# ============================================
+# Cel: Własne strony błędów zamiast domyślnych Apache
+# Odkomentuj i dostosuj jeśli masz własne strony błędów
+
+# ErrorDocument 404 /404.html
+# ErrorDocument 403 /403.html
+# ErrorDocument 500 /500.html
+
+
+# ============================================
+# DODATKOWE USTAWIENIA PHP (jeśli używasz PHP)
+# ============================================
+# Odkomentuj jeśli Twoja strona używa PHP
+
+# <IfModule mod_php7.c>
+#     # Zwiększ limit pamięci
+#     php_value memory_limit 256M
+#     
+#     # Zwiększ maksymalny rozmiar uploadu
+#     php_value upload_max_filesize 20M
+#     php_value post_max_size 20M
+#     
+#     # Wyłącz wyświetlanie błędów (produkcja)
+#     php_flag display_errors Off
+#     
+#     # Włącz logowanie błędów
+#     php_flag log_errors On
+# </IfModule>
+
+
+# ============================================
+# KONIEC PLIKU .htaccess
+# ============================================
+# Jeśli masz problemy, sprawdź:
+# 1. Czy moduły Apache są włączone (mod_rewrite, mod_headers, mod_expires)
+# 2. Czy plik .htaccess ma odpowiednie uprawnienia (644)
+# 3. Czy AllowOverride jest włączone w konfiguracji Apache
+# 4. Logi błędów Apache (/var/log/apache2/error.log)
+# ============================================

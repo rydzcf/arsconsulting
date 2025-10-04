@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARS CONSULTING - Doradztwo, Marketing, Projektowanie</title>
+    
+    <!-- SEO Meta Tags (tylko dla wersji polskiej) -->
+    <meta name="description" content="ARS CONSULTING - Kompleksowe doradztwo energetyczne, marketing 360° i projektowanie inwestycji. Profesjonalna obsługa w sektorze energetycznym.">
+    <meta name="keywords" content="doradztwo energetyczne, marketing 360, projektowanie inwestycji, bezpieczeństwo energetyczne, event marketing">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ARS CONSULTING - Doradztwo, Marketing, Projektowanie">
+    <meta property="og:description" content="Kompleksowa obsługa biznesowa - doradztwo energetyczne, marketing i projektowanie">
+    <meta property="og:type" content="website">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .fade-in-left {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+        
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .glass-dark {
+            background: rgba(19, 49, 87, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, #133157 0%, #1a4470 100%);
+        }
+        
+        .hover-lift {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.3);
+        }
+        
+        .logo-container img {
+            width: 195px;
+            height: 85px;
+            object-fit: contain;
+        }
+        
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(19, 49, 87, 0.98);
+            backdrop-filter: blur(10px);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #133157;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(19, 49, 87, 0.8) 0%, rgba(26, 68, 112, 0.6) 100%);
+        }
+        
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .section-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+        
+        .section-bg-scroll {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .mobile-nav-link {
+            font-size: 2rem;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: white;
+        }
+        
+        #mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 70;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    
+    <!-- Header -->
+    <header class="glass fixed w-full top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="logo-container flex items-center">
+                    <img src="logo.svg" alt="ARS CONSULTING Logo">
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.home">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.about">O nas</a>
+                    <a href="#consulting" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.consulting">Doradztwo</a>
+                    <a href="#marketing" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.marketing">Marketing</a>
+                    <a href="#design" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.design">Projektowanie</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-[#133157] font-medium" data-translate="nav.contact">Kontakt</a>
+                    
+                    <!-- Language Switcher -->
+                    <div class="flex space-x-2 ml-4">
+                        <button onclick="switchLanguage('pl')" class="lang-btn px-3 py-1 rounded glass-dark text-white text-sm hover:bg-[#133157] transition" data-lang="pl">PL</button>
+                        <button onclick="switchLanguage('en')" class="lang-btn px-3 py-1 rounded glass text-gray-700 text-sm hover:bg-[#133157] hover:text-white transition" data-lang="en">EN</button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 z-[70]">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <i id="mobile-menu-close" class="fas fa-times"></i>
+        <div class="flex flex-col w-full">
+            <a href="#home" class="mobile-nav-link" data-translate="nav.home">Home</a>
+            <a href="#about" class="mobile-nav-link" data-translate="nav.about">O nas</a>
+            <a href="#consulting" class="mobile-nav-link" data-translate="nav.consulting">Doradztwo</a>
+            <a href="#marketing" class="mobile-nav-link" data-translate="nav.marketing">Marketing</a>
+            <a href="#design" class="mobile-nav-link" data-translate="nav.design">Projektowanie</a>
+            <a href="#contact" class="mobile-nav-link" data-translate="nav.contact">Kontakt</a>
+            <div class="flex justify-center space-x-4 mt-8">
+                <button onclick="switchLanguage('pl')" class="lang-btn px-6 py-3 rounded glass-dark text-white text-lg" data-lang="pl">PL</button>
+                <button onclick="switchLanguage('en')" class="lang-btn px-6 py-3 rounded glass text-white text-lg" data-lang="en">EN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="home" class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920');">
+            <div class="hero-overlay absolute inset-0"></div>
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-4xl mx-auto text-center text-white fade-in">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6" data-translate="hero.title">ARS CONSULTING</h1>
+                        <p class="text-xl md:text-2xl mb-12 opacity-90" data-translate="hero.subtitle">Kompleksowa obsługa biznesowa na najwyższym poziomie</p>
+                        <a href="#contact" class="inline-block accent-gradient text-white px-10 py-5 rounded-full font-semibold text-xl hover:shadow-2xl transition transform hover:scale-105" data-translate="hero.cta">Skontaktuj się z nami</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="bg-white">
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-6xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                            <div class="fade-in-left">
+                                <h2 class="text-4xl md:text-5xl font-bold text-[#133157] mb-6" data-translate="about.title">O nas</h2>
+                                <p class="text-lg text-gray-700 leading-relaxed mb-6" data-translate="about.text">
+                                    Oferuje kompleksową obsługę, która dalece wykracza poza ofertę konkurencji. Nasze doświadczenie w połączeniu z rzetelnym doradztwem i zrozumieniem indywidualnych potrzeb sprawiają, że nasza oferta jest elastyczna i spersonalizowana. Jesteśmy otwarci na niestandardowe działania a zaufanie naszych klientów pozwala nam na podejmowanie śmiałych decyzji i realizowanie ambitnych planów.
+                                </p>
+                            </div>
+                            <div class="fade-in-right">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800" alt="Team meeting" class="rounded-2xl shadow-2xl w-full h-auto">
+                            </div>
+                        </div>
+
+                        <!-- Services Overview -->
+                        <h2 class="text-4xl md:text-5xl font-bold text-center text-[#133157] mb-12 fade-in" data-translate="services.title">Nasze usługi</h2>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 hover-lift fade-in text-center shadow-lg border border-gray-100">
+                                <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-handshake text-white text-3xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-[#133157] mb-4" data-translate="services.consulting.title">Doradztwo</h3>
+                                <p class="text-gray-700" data-translate="services.consulting.desc">Profesjonalne doradztwo w sektorze energetycznym</p>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 hover-lift fade-in text-center shadow-lg border border-gray-100">
+                                <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-bullhorn text-white text-3xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-[#133157] mb-4" data-translate="services.marketing.title">Marketing</h3>
+                                <p class="text-gray-700" data-translate="services.marketing.desc">Obsługa marketingowa 360 stopni</p>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 hover-lift fade-in text-center shadow-lg border border-gray-100">
+                                <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-drafting-compass text-white text-3xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-[#133157] mb-4" data-translate="services.design.title">Projektowanie</h3>
+                                <p class="text-gray-700" data-translate="services.design.desc">Kompleksowa obsługa projektowa inwestycji</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consulting Section -->
+        <section id="consulting" class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920');">
+            <div class="absolute inset-0 bg-white/90"></div>
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-6xl mx-auto">
+                        <div class="text-center mb-16 fade-in">
+                            <h1 class="text-5xl md:text-6xl font-bold text-[#133157] mb-6" data-translate="consulting.title">Doradztwo</h1>
+                            <p class="text-xl text-gray-700 max-w-3xl mx-auto" data-translate="consulting.intro">
+                                Naszym celem jest świadczenie profesjonalnych usług doradczych na najwyższym poziomie, opierając się na unikalnym połączeniu eksperckiej wiedzy oraz na wieloletnim doświadczeniu. Prowadzimy działalność w sektorze energetycznym.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-12">
+                            <div class="fade-in-left">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800" alt="Energy consulting" class="rounded-2xl shadow-2xl w-full h-96 object-cover">
+                            </div>
+                            <div class="space-y-6 fade-in-right">
+                                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg flex items-start space-x-4">
+                                    <div class="w-14 h-14 accent-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-balance-scale text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-[#133157] mb-2" data-translate="consulting.services.legal">Prawo energetyczne</h3>
+                                        <p class="text-gray-700" data-translate="consulting.services.legal.desc">Oferujemy doradztwo w zakresie prawa i bezpieczeństwa energetycznego</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg flex items-start space-x-4">
+                                    <div class="w-14 h-14 accent-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-industry text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-[#133157] mb-2" data-translate="consulting.services.resources">Pozyskiwanie surowców</h3>
+                                        <p class="text-gray-700" data-translate="consulting.services.resources.desc">Pomagamy w pozyskiwaniu surowców energetycznych</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-6 fade-in-left">
+                                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg flex items-start space-x-4">
+                                    <div class="w-14 h-14 accent-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-[#133157] mb-2" data-translate="consulting.services.safety">Bezpieczeństwo</h3>
+                                        <p class="text-gray-700" data-translate="consulting.services.safety.desc">Wdrażamy procedury bezpieczeństwa zgodnie z wymogami UE</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg flex items-start space-x-4">
+                                    <div class="w-14 h-14 accent-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-comments text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-[#133157] mb-2" data-translate="consulting.services.negotiations">Negocjacje</h3>
+                                        <p class="text-gray-700" data-translate="consulting.services.negotiations.desc">Prowadzimy negocjacje biznesowe w języku polskim, rosyjskim i angielskim</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fade-in-right">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" alt="Business negotiations" class="rounded-2xl shadow-2xl w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketing Section -->
+        <section id="marketing" class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920');">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/95 to-gray-50/95"></div>
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-6xl mx-auto">
+                        <div class="text-center mb-16 fade-in">
+                            <h1 class="text-5xl md:text-6xl font-bold text-[#133157] mb-6" data-translate="marketing.title">Marketing</h1>
+                            <p class="text-xl text-gray-700 max-w-3xl mx-auto" data-translate="marketing.intro">
+                                Zapewniamy pełną obsługę marketingową począwszy od strategii marketingowej a na kampanii reklamowej skończywszy. Oferujemy obsługę w modelu 360 stopni.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-12 mb-12">
+                            <div class="fade-in-left">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800" alt="Digital marketing team" class="rounded-2xl shadow-2xl w-full h-96 object-cover">
+                            </div>
+                            <div class="fade-in-right">
+                                <h2 class="text-3xl md:text-4xl font-bold text-[#133157] mb-6" data-translate="marketing.internet.title">Internet Marketing</h2>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.internet.graphic">Reklama graficzna</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.internet.websites">Tworzenie stron internetowych</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.internet.sem">Search Engine Marketing (SEM)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.internet.social">Social Media Marketing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-12 mb-12">
+                            <div class="order-2 md:order-1 fade-in-left">
+                                <h2 class="text-3xl md:text-4xl font-bold text-[#133157] mb-6" data-translate="marketing.event.title">Event Marketing</h2>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.event.conferences">Organizacja konferencji i szkoleń</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.event.sponsorship">Sponsoring wydarzeń</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.event.loyalty">Wyjazdy lojalnościowe dla klientów</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow">
+                                        <i class="fas fa-check-circle text-[#133157] text-2xl"></i>
+                                        <span class="text-gray-700 text-lg" data-translate="marketing.event.vip">Obsługa klientów VIP</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-1 md:order-2 fade-in-right">
+                                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800" alt="Event marketing" class="rounded-2xl shadow-2xl w-full h-96 object-cover">
+                            </div>
+                        </div>
+
+                        <!-- Additional Services with Images -->
+                        <div class="grid md:grid-cols-3 gap-8 fade-in">
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift">
+                                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600" alt="Luxury boat" class="w-full h-64 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157] to-transparent flex items-end">
+                                    <div class="p-6 text-white w-full">
+                                        <i class="fas fa-ship text-3xl mb-2"></i>
+                                        <h3 class="text-xl font-bold mb-2" data-translate="marketing.equipment.title">Baza sprzętu</h3>
+                                        <p class="text-sm opacity-90">Łodzie, skutery wodne, samochody premium</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift">
+                                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600" alt="Luxury apartment" class="w-full h-64 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157] to-transparent flex items-end">
+                                    <div class="p-6 text-white w-full">
+                                        <i class="fas fa-home text-3xl mb-2"></i>
+                                        <h3 class="text-xl font-bold mb-2" data-translate="marketing.accommodation.title">Baza noclegowa</h3>
+                                        <p class="text-sm opacity-90" data-translate="marketing.accommodation.desc">Apartamenty w kraju i zagranicą</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift">
+                                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600" alt="Marketing 360" class="w-full h-64 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157] to-transparent flex items-end">
+                                    <div class="p-6 text-white w-full">
+                                        <i class="fas fa-star text-3xl mb-2"></i>
+                                        <h3 class="text-xl font-bold mb-2">Marketing 360°</h3>
+                                        <p class="text-sm opacity-90">ATL, BTL, B2B, PR</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Section -->
+        <section id="design" class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920');">
+            <div class="absolute inset-0 bg-white/92"></div>
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-6xl mx-auto">
+                        <div class="text-center mb-16 fade-in">
+                            <h1 class="text-5xl md:text-6xl font-bold text-[#133157] mb-6" data-translate="design.title">Projektowanie</h1>
+                            <p class="text-xl text-gray-700 mb-6 max-w-3xl mx-auto" data-translate="design.intro">
+                                Naszą specjalnością jest kompleksowa obsługa projektowa i doradcza inwestycji - od wstępnych analiz, poprzez pozyskiwanie finansowania aż po projekty wykonawcze.
+                            </p>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-translate="design.description">
+                                Z powodzeniem realizujemy projekty zarówno w sektorze prywatnym, jak i publicznym. Proponujemy doradztwo na każdym etapie inwestycji.
+                            </p>
+                        </div>
+                        
+                        <h2 class="text-4xl font-bold text-[#133157] mb-12 text-center fade-in" data-translate="design.offer.title">Nasza oferta obejmuje</h2>
+                        
+                        <div class="grid md:grid-cols-3 gap-8 mb-12 fade-in">
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift group">
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" alt="Logistics base" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157]/90 via-[#133157]/50 to-transparent flex flex-col items-center justify-end p-8">
+                                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-warehouse text-[#133157] text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-3 text-center" data-translate="design.offer.logistics">Bazy logistyczne</h3>
+                                    <p class="text-white/90 text-center" data-translate="design.offer.logistics.desc">Projektowanie i realizacja kompleksowych obiektów logistycznych</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift group">
+                                <img src="https://images.unsplash.com/photo-1545262810-77515befe149?w=600" alt="Fuel base" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157]/90 via-[#133157]/50 to-transparent flex flex-col items-center justify-end p-8">
+                                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-gas-pump text-[#133157] text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-3 text-center" data-translate="design.offer.fuel">Bazy paliwowe</h3>
+                                    <p class="text-white/90 text-center" data-translate="design.offer.fuel.desc">Specjalistyczne projekty infrastruktury paliwowej</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-2xl shadow-xl hover-lift group">
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" alt="Apartments" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#133157]/90 via-[#133157]/50 to-transparent flex flex-col items-center justify-end p-8">
+                                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-building text-[#133157] text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white mb-3 text-center" data-translate="design.offer.apartments">Apartamenty</h3>
+                                    <p class="text-white/90 text-center" data-translate="design.offer.apartments.desc">Projekty mieszkaniowe i apartamentowe</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Design Images -->
+                        <div class="grid md:grid-cols-2 gap-8 fade-in">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800" alt="Architecture planning" class="rounded-2xl shadow-2xl w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800" alt="Blueprint design" class="rounded-2xl shadow-2xl w-full h-64 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920');">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#133157]/95 to-[#1a4470]/95"></div>
+            <div class="section-content">
+                <div class="container mx-auto px-4 py-20">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <div class="fade-in mb-12">
+                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6" data-translate="contact.title">Kontakt</h1>
+                            <p class="text-xl text-white/90" data-translate="contact.subtitle">Skontaktuj się z nami</p>
+                        </div>
+
+                        <div class="glass rounded-3xl p-8 md:p-12 fade-in">
+                            <div class="grid md:grid-cols-3 gap-8">
+                                <div class="text-center">
+                                    <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-building text-white text-2xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-[#133157] text-xl mb-2">ARS CONSULTING</h3>
+                                    <p class="text-gray-700">ul. Solec 63</p>
+                                    <p class="text-gray-700">00-409 Warszawa</p>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-phone text-white text-2xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-[#133157] text-xl mb-2" data-translate="contact.phone">Telefon</h3>
+                                    <p class="text-gray-700 text-lg">22 628 33 59</p>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="w-20 h-20 accent-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-file-invoice text-white text-2xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-[#133157] text-xl mb-2">NIP</h3>
+                                    <p class="text-gray-700 text-lg">5262719226</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ARS CONSULTING</h3>
+                    <p class="text-gray-300 text-sm">
+                        ul. Solec 63<br>
+                        00-409 Warszawa<br>
+                        tel. 22 628 33 59<br>
+                        NIP: 5262719226
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-translate="footer.links">Linki</h3>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li><a href="#home" class="hover:text-white transition" data-translate="nav.home">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition" data-translate="nav.about">O nas</a></li>
+                        <li><a href="#consulting" class="hover:text-white transition" data-translate="nav.consulting">Doradztwo</a></li>
+                        <li><a href="#marketing" class="hover:text-white transition" data-translate="nav.marketing">Marketing</a></li>
+                        <li><a href="#design" class="hover:text-white transition" data-translate="nav.design">Projektowanie</a></li>
+                        <li><a href="#contact" class="hover:text-white transition" data-translate="nav.contact">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">RODO</h3>
+                    <p class="text-gray-300 text-sm" data-translate="footer.rodo">
+                        Informujemy, że podanie danych osobowych jest dobrowolne. Istnieje prawo dostępu do treści swoich danych i ich sprostowania, usunięcia, ograniczenia przetwarzania i prawo do przenoszenia danych. Podane dane będą przetwarzane zgodnie z treścią rozporządzenia Parlamentu Europejskiego i Rady (UE)2016/679 z 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE – Dz.Urz. UE L 119.
+                    </p>
+                    <p class="text-gray-300 text-sm mt-4">
+                        <strong data-translate="footer.rodo.contact">Kontakt w sprawie RODO:</strong><br>
+                        rodo@arsconsulting.pl
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-8 text-center text-gray-300 text-sm">
+                <p>&copy; <a href="https://emer.co" target="_blank" class="hover:text-white transition">emer.co</a> <span id="current-year"></span> <span data-translate="footer.copyright">aplikacje internetowe</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            pl: {
+                nav: {
+                    home: "Home",
+                    about: "O nas",
+                    consulting: "Doradztwo",
+                    marketing: "Marketing",
+                    design: "Projektowanie",
+                    contact: "Kontakt"
+                },
+                hero: {
+                    title: "ARS CONSULTING",
+                    subtitle: "Kompleksowa obsługa biznesowa na najwyższym poziomie",
+                    cta: "Skontaktuj się z nami"
+                },
+                about: {
+                    title: "O nas",
+                    text: "Oferuje kompleksową obsługę, która dalece wykracza poza ofertę konkurencji. Nasze doświadczenie w połączeniu z rzetelnym doradztwem i zrozumieniem indywidualnych potrzeb sprawiają, że nasza oferta jest elastyczna i spersonalizowana. Jesteśmy otwarci na niestandardowe działania a zaufanie naszych klientów pozwala nam na podejmowanie śmiałych decyzji i realizowanie ambitnych planów."
+                },
+                services: {
+                    title: "Nasze usługi",
+                    consulting: {
+                        title: "Doradztwo",
+                        desc: "Profesjonalne doradztwo w sektorze energetycznym"
+                    },
+                    marketing: {
+                        title: "Marketing",
+                        desc: "Obsługa marketingowa 360 stopni"
+                    },
+                    design: {
+                        title: "Projektowanie",
+                        desc: "Kompleksowa obsługa projektowa inwestycji"
+                    }
+                },
+                consulting: {
+                    title: "Doradztwo",
+                    intro: "Naszym celem jest świadczenie profesjonalnych usług doradczych na najwyższym poziomie, opierając się na unikalnym połączeniu eksperckiej wiedzy oraz na wieloletnim doświadczeniu. Prowadzimy działalność w sektorze energetycznym.",
+                    services: {
+                        legal: "Prawo energetyczne",
+                        "legal.desc": "Oferujemy doradztwo w zakresie prawa i bezpieczeństwa energetycznego",
+                        resources: "Pozyskiwanie surowców",
+                        "resources.desc": "Pomagamy w pozyskiwaniu surowców energetycznych",
+                        safety: "Bezpieczeństwo",
+                        "safety.desc": "Wdrażamy procedury bezpieczeństwa zgodnie z wymogami UE",
+                        negotiations: "Negocjacje",
+                        "negotiations.desc": "Prowadzimy negocjacje biznesowe w języku polskim, rosyjskim i angielskim"
+                    }
+                },
+                marketing: {
+                    title: "Marketing",
+                    intro: "Zapewniamy pełną obsługę marketingową począwszy od strategii marketingowej a na kampanii reklamowej skończywszy. Oferujemy obsługę w modelu 360 stopni.",
+                    internet: {
+                        title: "Internet Marketing",
+                        graphic: "Reklama graficzna",
+                        websites: "Tworzenie stron internetowych",
+                        sem: "Search Engine Marketing (SEM)",
+                        social: "Social Media Marketing"
+                    },
+                    event: {
+                        title: "Event Marketing",
+                        conferences: "Organizacja konferencji i szkoleń",
+                        sponsorship: "Sponsoring wydarzeń",
+                        loyalty: "Wyjazdy lojalnościowe dla klientów",
+                        vip: "Obsługa klientów VIP"
+                    },
+                    equipment: {
+                        title: "Baza sprzętu"
+                    },
+                    accommodation: {
+                        title: "Baza noclegowa",
+                        desc: "Apartamenty w kraju i zagranicą"
+                    }
+                },
+                design: {
+                    title: "Projektowanie",
+                    intro: "Naszą specjalnością jest kompleksowa obsługa projektowa i doradcza inwestycji - od wstępnych analiz, poprzez pozyskiwanie finansowania aż po projekty wykonawcze.",
+                    description: "Z powodzeniem realizujemy projekty zarówno w sektorze prywatnym, jak i publicznym. Proponujemy doradztwo na każdym etapie inwestycji.",
+                    offer: {
+                        title: "Nasza oferta obejmuje",
+                        logistics: "Bazy logistyczne",
+                        "logistics.desc": "Projektowanie i realizacja kompleksowych obiektów logistycznych",
+                        fuel: "Bazy paliwowe",
+                        "fuel.desc": "Specjalistyczne projekty infrastruktury paliwowej",
+                        apartments: "Apartamenty",
+                        "apartments.desc": "Projekty mieszkaniowe i apartamentowe"
+                    }
+                },
+                contact: {
+                    title: "Kontakt",
+                    subtitle: "Skontaktuj się z nami",
+                    phone: "Telefon"
+                },
+                footer: {
+                    links: "Linki",
+                    rodo: "Informujemy, że podanie danych osobowych jest dobrowolne. Istnieje prawo dostępu do treści swoich danych i ich sprostowania, usunięcia, ograniczenia przetwarzania i prawo do przenoszenia danych. Podane dane będą przetwarzane zgodnie z treścią rozporządzenia Parlamentu Europejskiego i Rady (UE)2016/679 z 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE – Dz.Urz. UE L 119.",
+                    "rodo.contact": "Kontakt w sprawie RODO:",
+                    copyright: "aplikacje internetowe"
+                }
+            },
+            en: {
+                nav: {
+                    home: "Home",
+                    about: "About us",
+                    consulting: "Consulting",
+                    marketing: "Marketing",
+                    design: "Design",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "ARS CONSULTING",
+                    subtitle: "Comprehensive business services at the highest level",
+                    cta: "Contact us"
+                },
+                about: {
+                    title: "About us",
+                    text: "We offer comprehensive services that far exceed the competition's offer. Our experience combined with reliable consulting and understanding of individual needs make our offer flexible and personalized. We are open to non-standard activities and the trust of our clients allows us to make bold decisions and implement ambitious plans."
+                },
+                services: {
+                    title: "Our services",
+                    consulting: {
+                        title: "Consulting",
+                        desc: "Professional consulting in the energy sector"
+                    },
+                    marketing: {
+                        title: "Marketing",
+                        desc: "360-degree marketing services"
+                    },
+                    design: {
+                        title: "Design",
+                        desc: "Comprehensive investment project services"
+                    }
+                },
+                consulting: {
+                    title: "Consulting",
+                    intro: "Our goal is to provide professional consulting services at the highest level, based on a unique combination of expert knowledge and many years of experience. We operate in the energy sector.",
+                    services: {
+                        legal: "Energy law",
+                        "legal.desc": "We offer consulting in the field of energy law and security",
+                        resources: "Resource acquisition",
+                        "resources.desc": "We help in acquiring energy resources",
+                        safety: "Safety",
+                        "safety.desc": "We implement safety procedures in accordance with EU requirements",
+                        negotiations: "Negotiations",
+                        "negotiations.desc": "We conduct business negotiations in Polish, Russian and English"
+                    }
+                },
+                marketing: {
+                    title: "Marketing",
+                    intro: "We provide full marketing services ranging from marketing strategy to advertising campaigns. We offer 360-degree services.",
+                    internet: {
+                        title: "Internet Marketing",
+                        graphic: "Graphic advertising",
+                        websites: "Website creation",
+                        sem: "Search Engine Marketing (SEM)",
+                        social: "Social Media Marketing"
+                    },
+                    event: {
+                        title: "Event Marketing",
+                        conferences: "Organization of conferences and training",
+                        sponsorship: "Event sponsorship",
+                        loyalty: "Loyalty trips for key clients",
+                        vip: "Comprehensive VIP client service"
+                    },
+                    equipment: {
+                        title: "Equipment base"
+                    },
+                    accommodation: {
+                        title: "Accommodation base",
+                        desc: "We have apartments domestically and abroad"
+                    }
+                },
+                design: {
+                    title: "Design",
+                    intro: "Our specialty is comprehensive design and consulting services for investments - from preliminary analyses, through obtaining financing to executive projects.",
+                    description: "We successfully implement projects in both the private and public sectors. We offer consulting at every stage of the investment.",
+                    offer: {
+                        title: "Our offer includes",
+                        logistics: "Logistics bases",
+                        "logistics.desc": "Design and implementation of comprehensive logistics facilities",
+                        fuel: "Fuel bases",
+                        "fuel.desc": "Specialized fuel infrastructure projects",
+                        apartments: "Apartments",
+                        "apartments.desc": "Residential and apartment projects"
+                    }
+                },
+                contact: {
+                    title: "Contact",
+                    subtitle: "Get in touch with us",
+                    phone: "Phone"
+                },
+                footer: {
+                    links: "Links",
+                    rodo: "We inform you that providing personal data is voluntary. You have the right to access, rectify, delete, restrict processing and transfer your data. The provided data will be processed in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data.",
+                    "rodo.contact": "GDPR contact:",
+                    copyright: "web applications"
+                }
+            }
+        };
+
+        let currentLang = 'pl';
+
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+        });
+
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Language switcher
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.remove('glass', 'text-gray-700');
+                    btn.classList.add('glass-dark', 'text-white');
+                } else {
+                    btn.classList.remove('glass-dark', 'text-white');
+                    btn.classList.add('glass', 'text-gray-700');
+                }
+            });
+            
+            // Update all translated elements
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                const translation = getTranslation(key, lang);
+                if (translation) {
+                    el.textContent = translation;
+                }
+            });
+            
+            // Update SEO meta tags (only for Polish)
+            if (lang === 'pl') {
+                document.querySelector('meta[name="robots"]').setAttribute('content', 'index, follow');
+            } else {
+                document.querySelector('meta[name="robots"]').setAttribute('content', 'noindex, nofollow');
+            }
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update URL
+            history.pushState(null, '', `/${lang}`);
+        }
+
+        function getTranslation(key, lang) {
+            const keys = key.split('.');
+            let value = translations[lang];
+            
+            for (const k of keys) {
+                if (value && value[k] !== undefined) {
+                    value = value[k];
+                } else {
+                    return null;
+                }
+            }
+            
+            return value;
+        }
+
+        // Handle initial URL
+        window.addEventListener('load', function() {
+            const path = window.location.pathname;
+            const hash = window.location.hash.substring(1);
+            
+            // Handle language from URL
+            if (path.includes('/en')) {
+                switchLanguage('en');
+            } else {
+                switchLanguage('pl');
+            }
+            
+            // Handle section from hash
+            if (hash) {
+                setTimeout(() => {
+                    const element = document.getElementById(hash);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100);
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

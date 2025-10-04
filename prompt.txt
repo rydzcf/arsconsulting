@@ -1,0 +1,76 @@
+Proszę wygenerować kompletną, nowoczesną i responsywną stronę internetową, spełniającą poniższe wymagania:
+
+1. Wymagania ogólne
+1.1. Strona ma być landingpage
+1.2. Używaj tailwindcss
+1.3. Używaj lekkich animacji typu fadein aby strona była nowoczesna
+1.4. Wstawiaj dużo zdjęć, najlepiej z freekpik
+1.2. Na każdej podstronie powtarza się header i footer. Kod ma być w odzielnych plikach header.html i footer.html
+1.3. Strona jest wielojęzyczna → stwórz routing do /pl, /en
+1.4. SEO włącz tylko dla polskiej wersji
+1.5. Treści do innych wersji językowych ma być dynamicznie wstawiana z pliku np. en.json
+1.6. W footerze umieść © emer.co [CURRENT_YEAR] aplikacje internetowe (automatycznie aktualny rok) link do https://emer.co
+1.7. Logo ma być importowane z pliku /logo.svg i jest w proporcjach 16:8
+
+2. Design
+2.1. Design: styl glassmorphism (rozmyte tła, miękkie cienie, półprzezroczystość).
+2.2. Kolory: akcent - #133157, tło - białe, tekst - grafit
+
+3. Menu
+3.1. Struktura: Home, Doradztwo, Marketing, Projektowanie, Kontakt
+
+4. Informacje ogólne o stronie
+4.1. Nazwa: ARS CONSULTING
+
+5. Dane kontaktowe
+Ars Consulting
+ul. Solec 63
+00-409 Warszawa
+tel. 22 628 33 59
+NIP: 5262719226
+
+6. Treści
+6.1. O nas
+Oferuje kompleksową obsługę, która dalece wykracza poza ofertę konkurencji. Nasze doświadczenie w połączeniu z rzetelnym doradztwem i zrozumieniem indywidualnych potrzeb sprawiają, że nasza oferta jest elastyczna i spersonalizowana. Jesteśmy otwarci na niestandardowe działania a zaufanie naszych klientów pozwala nam na podejmowanie śmiałych decyzji i realizowanie ambitnych planów.
+6.2. Doradztwo
+Naszym celem jest świadczenie profesjonalnych usług doradczych na najwyższym poziomie, opierając się na unikalnym połączeniu eksperckiej wiedzy oraz na wieloletnim doświadczeniu. Prowadzimy działalność w sektorze energetycznym.
+• oferujemy doradztwo w zakresie prawa i bezpieczeństwa energetycznego;
+• pomagamy w pozyskiwaniu surowców;
+• wdrażamy procedury bezpieczeństwa zgodnie z wymogami UE;
+• prowadzimy negocjacje biznesowe w języku polskim, rosyjskim i angielskim.
+6.3. Marketing
+Zapewniamy pełną obsługę marketingową począwszy od strategii marketingowej a na kampanii reklamowej skończywszy. Oferujemy obsługę w modelu 360 stopni.
+1. INTERNET MARKETING
+• reklama graficzna
+• tworzenie stron internetowych
+• search engine marketing (SEM)
+• social media marketing
+• organizacja stoisk reklamowych;
+2. EVENT MARKETING
+• organizacja konferencji i szkoleń;
+• organizacja stoisk reklamowych;
+• sponsoring wydarzeń;
+• wyjazdy „lojalnościowe” dla kluczowych klientów;
+• kompleksowa obsługa klientów VIP – dysponujemy szeroką bazą sprzętu:
+- ŁODZIE
+- SKUTERY WODNE
+- SAMOCHODY MAREK PREMIUM
+3. oraz własna bazą noclegową - posiadamy apartamenty w kraju i zagranicą
+ATL
+BTL
+B2B MARKETING
+PR
+6.4. Projektowanie
+Naszą specjalnością jest kompleksowa obsługa projektowa i doradcza inwestycji - od wstępnych analiz, poprzez pozyskiwanie finansowania aż po projekty wykonawcze.
+Z powodzeniem realizujemy projekty zarówno w sektorze prywatnym, jak i publicznym. Proponujemy doradztwo na każdym etapie inwestycji.
+NASZA OFERTA OBEJMUJE
+• bazy logistyczne;
+• bazy paliwowe;
+• apartamenty.
+6.5. Kontakt
+ARS CONSULTING
+Ul. Solec 63
+00-409 Warszawa
+tel. 22 628 33 59
+6.6. W stopce inforamcja o rodo:
+Informujemy, że podanie danych osobowych jest dobrowolne. Istnieje prawo dostępu do treści swoich danych i ich sprostowania, usunięcia, ograniczenia przetwarzania i prawo do przenoszenia danych. Podane dane będą przetwarzane zgodnie z treścią rozporządzenia Parlamentu Europejskiego i Rady (UE)2016/679 z 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE – Dz.Urz. UE L 119. W przypadku dodatkowych pytań dotyczących ochrony danych osobowych przez naszą firmę prosimy pisać na adres: rodo@arsconsulting.pl
