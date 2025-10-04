@@ -1,0 +1,40 @@
+name: Deploy to serwer38987
+on:
+  push:
+    branches:
+      - main # Workflow uruchamia się przy pushu na gałąź `main`
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERWER38987_AUTO_DEPLOY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy static files to serwer38987
+        run: |
+          APP_NAME="arsconsulting.pl"
+          DEPLOY_DIR="~/public_html/$APP_NAME"
+          
+          # Połączenie SSH i przygotowanie katalogu na serwerze
+          ssh -o StrictHostKeyChecking=no -p 40022 serwer38987@5.252.229.67 << EOF
+          DEPLOY_DIR="~/public_html/${APP_NAME}"
+          # Usunięcie całego katalogu i utworzenie go na nowo
+          rm -rf "\$DEPLOY_DIR"
+          mkdir -p "\$DEPLOY_DIR"
+          EOF
+          
+          # Wysłanie wszystkich plików z głównego katalogu (z wykluczeniem .git i .github)
+          rsync -avz --progress -e "ssh -p 40022 -o StrictHostKeyChecking=no" \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='package-lock.json' \
+            --exclude='README.md' \
+            ./ serwer38987@5.252.229.67:$DEPLOY_DIR/
