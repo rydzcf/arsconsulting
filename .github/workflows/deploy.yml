@@ -37,4 +37,6 @@ jobs:
             --exclude='node_modules' \
             --exclude='package-lock.json' \
             --exclude='README.md' \
+            --exclude='tailwind.config.js' \
+            --exclude='prompt.txt' \
             ./ serwer38987@5.252.229.67:$DEPLOY_DIR/
