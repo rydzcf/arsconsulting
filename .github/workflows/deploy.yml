@@ -30,8 +30,8 @@ jobs:
           mkdir -p "\$DEPLOY_DIR"
           EOF
           
-          # Wysłanie wszystkich plików z głównego katalogu (z wykluczeniem .git i .github)
-          rsync -avz --progress -e "ssh -p 40022 -o StrictHostKeyChecking=no" \
+          # Wysłanie wszystkich plików z głównego katalogu (z wykluczeniem .git i .github i innych)
+          rsync -avz --delete --progress -e "ssh -p 40022 -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='node_modules' \
